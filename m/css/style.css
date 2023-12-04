@@ -6,17 +6,18 @@ html, body {
 
 #app {
   display: block;
-  width: 100%;
+  width: 700px;
   height: 100%;
-  margin-top: 20px;
+  padding-top: 20px;
+  margin: 0 auto;
 }
 
   #canvas {
     width: 700px;
     height: 550px;
     border: 1px solid black;
-    margin: 0 auto;
     position: relative;
+    margin-top: 10px;
   }
 
     #bg {
@@ -26,7 +27,6 @@ html, body {
       top: 0;
       left: 0;
       pointer-events: none;
-      background-color: gray;
       z-index: -1;
     }
 
@@ -36,6 +36,7 @@ html, body {
       left: 3%;
       height: 100%;
       position: relative;
+      color: white;
     }
 
     .line {
@@ -46,7 +47,6 @@ html, body {
       height: 25%;
       left: 0;
       width: 100%;
-      color: white;
       display: inline-block;
       display: flex;
       align-items: center;
@@ -56,7 +56,7 @@ html, body {
 
     #line1 { top: 0; }
 
-    #line2 { top: 33%; }
+    #line2 { top: 35%; }
 
     #line3 { bottom: 0; }
     
