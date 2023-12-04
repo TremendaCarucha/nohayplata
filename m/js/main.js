@@ -18,19 +18,7 @@
     fitted.fit()
   }
 
-  const bg = document.getElementById('bg')
-  const updateBg = () => {
-    document.getElementById('background').style.background = bg.value
-  }
-  bg.addEventListener('change', updateBg)
-  updateBg()
-  
-  const fg = document.getElementById('fg')
-  const updateText = () => {
-    document.getElementById('lines').style.color = fg.value
-  }
-  fg.addEventListener('change', updateText)
-  updateText()
+  // Sharing
 
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
 
@@ -62,4 +50,20 @@
       }
     }
   })
+
+  // BG & FG
+
+  const bg = document.getElementById('bg')
+  const updateBg = () => {
+    document.getElementById('background').style.background = bg.value
+  }
+  bg.addEventListener('change', updateBg)
+  updateBg()
+  
+  const fg = document.getElementById('fg')
+  const updateText = () => {
+    document.getElementById('lines').style.color = fg.value
+  }
+  fg.addEventListener('change', updateText)
+  updateText()
 })()
