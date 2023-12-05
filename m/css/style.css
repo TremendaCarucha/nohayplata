@@ -6,10 +6,11 @@ html, body {
 
 #app {
   display: block;
-  width: 700px;
+  width: 720px;
   height: 100%;
-  padding-top: 20px;
   margin: 0 auto;
+  padding: 20px 10px 0 10px;
+  box-sizing: border-box;
 }
 
   #canvas {
@@ -22,9 +23,9 @@ html, body {
 
     #lines {
       padding: 0 3%;
+      box-sizing: border-box;
       height: 100%;
       color: white;
-      box-sizing: border-box;
     }
 
     .line {
