@@ -45,8 +45,11 @@
     const search = new URLSearchParams()
     IDS.forEach((id) => {
       const elem = dom[id]
-      const val = elem.value || elem.innerText
+      let val = elem.value || elem.innerText
       if (val && val !== '0') {
+        if (elem.type === 'color') {
+          val = val.replace('#', '')
+        }
         search.append(id, val)
       }
     })
@@ -57,6 +60,9 @@
   search.forEach((val, id) => {
     const elem = dom[id]
     if (elem) {
+      if (elem.type === 'color') {
+        val = '#' + val
+      }
       if ('value' in elem) {
         elem.value = val
       } else {
