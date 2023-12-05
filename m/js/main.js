@@ -1,5 +1,5 @@
 (() => {
-  const MAX_BG = 37
+  const MAX_BG = 33
 
   const $ = (id) => document.getElementById(id)
   const on = (elem, event, handler) => {
@@ -46,7 +46,7 @@
     IDS.forEach((id) => {
       const elem = dom[id]
       let val = elem.value || elem.innerText
-      if (val && val !== '0') {
+      if (val && val !== elem.defaultValue) {
         if (elem.type === 'color') {
           val = val.replace('#', '')
         }
