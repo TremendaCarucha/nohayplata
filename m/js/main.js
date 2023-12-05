@@ -1,5 +1,5 @@
 (() => {
-  const MAX_BG = 34
+  const MAX_BG = 37
 
   const $ = (id) => document.getElementById(id)
   const on = (elem, event, handler) => {
@@ -30,10 +30,13 @@
     on(line.parentNode, 'click', (e) => {
       line.focus()
     })
+    on(line, 'fit', (e) => {
+      line.style.lineHeight = line.style.fontSize
+    })
     on(line, 'keydown', (e) => {
       if (e.keyCode === 13) {
         // No enters
-        e.preventDefault()
+        // e.preventDefault()
       }
     })
     fitted.fit()
@@ -120,8 +123,6 @@
       taintTest: false,
       allowTaint: false
     }).then((canvas) => {
-      document.body.appendChild(canvas)
-
       const url = canvas.toDataURL()
       const filename = lines.map(l => l.innerText).join(' ').toLowerCase().replace(/\W+/g, ' ').trim().replace(/ /g, '_')
       const download = $('download')
