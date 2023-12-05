@@ -53,10 +53,12 @@
         search.append(id, val)
       }
     })
-    location.search = '?' + search.toString()
+    const url = location.href.replace(/[#?].*/, '') + '#' + search.toString()
+    location.href = url
+    navigator.clipboard.writeText(url)
   }
 
-  const search = new URLSearchParams(location.search)
+  const search = new URLSearchParams(location.hash.slice(1))
   search.forEach((val, id) => {
     const elem = dom[id]
     if (elem) {
