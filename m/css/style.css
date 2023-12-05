@@ -19,7 +19,7 @@ html, body {
     height: 550px;
     border: 1px solid black;
     position: relative;
-    margin-top: 10px;
+    margin: 20px 0;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
