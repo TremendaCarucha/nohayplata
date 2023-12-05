@@ -23,26 +23,21 @@
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
 
   document.getElementById('share').onclick = () => {
-    const vals = IDS
-      .map((id) => {
-        const elem = document.getElementById(id)
-        const val = elem.value || elem.innerText
-        return val && id + '=' + encodeURIComponent(val)
-      })
-      .filter(v => !!v)
-
-    location.search = '?' + vals.join('&')
+    const search = new URLSearchParams()
+    IDS.forEach((id) => {
+      const elem = document.getElementById(id)
+      const val = elem.value || elem.innerText
+      if (val) {
+        search.append(id, val)
+      }
+    })
+    location.search = '?' + search.toString()
   }
 
-  location.search.slice(1).split('&').forEach((s) => {
-    if (!s) {
-      return
-    }
-    const parts = s.split('=')
-    const id = parts[0]
-    const val = decodeURIComponent(parts[1])
-    const elem = document.getElementById(id)
+  const search = new URLSearchParams(location.search)
+  search.forEach((val, id) => {
     if (id) {
+      const elem = document.getElementById(id)
       if ('value' in elem) {
         elem.value = val
       } else {
