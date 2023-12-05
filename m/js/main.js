@@ -1,4 +1,6 @@
 (() => {
+  const MAX_BG = 37
+
   const $ = (id) => document.getElementById(id)
 
   const rescale = () => {
@@ -10,7 +12,7 @@
   rescale()
   window.addEventListener('resize', rescale);
 
-  const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
+  const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
   IDS.forEach(id => dom[id] = $(id))
 
@@ -40,7 +42,7 @@
     IDS.forEach((id) => {
       const elem = dom[id]
       const val = elem.value || elem.innerText
-      if (val) {
+      if (val && val !== '0') {
         search.append(id, val)
       }
     })
@@ -59,17 +61,37 @@
     }
   })
 
-  // BG & FG
+  // BG & FG color
 
-  const updateBg = () => {
+  const updateBgColor = () => {
     $('canvas').style.backgroundColor = dom.bg.value
   }
-  dom.bg.addEventListener('change', updateBg)
-  updateBg()
+  dom.bg.addEventListener('change', updateBgColor)
+  updateBgColor()
   
   const updateText = () => {
     $('lines').style.color = dom.fg.value
   }
   dom.fg.addEventListener('change', updateText)
   updateText()
+
+  // Bg URL
+
+  const updateBgUrl = () => {
+    const index = dom.bgn.value
+    $('canvas').style.backgroundImage = index === '0' ? '' : 'url(bg/' + index + '.jpg)'
+  }
+  const changeBgUrl = (by) => {
+    const index = Math.min(MAX_BG, Math.max(0, parseInt(dom.bgn.value) + by))
+    dom.bgn.value = index
+    updateBgUrl()
+  }
+  updateBgUrl()
+  $('prev-bg').addEventListener('click', () => {
+    changeBgUrl(-1)
+  })
+  $('next-bg').addEventListener('click', () => {
+    changeBgUrl(+1)
+  })
+
 })()

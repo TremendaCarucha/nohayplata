@@ -20,6 +20,9 @@ html, body {
     border: 1px solid black;
     position: relative;
     margin-top: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
     #lines {
@@ -46,3 +49,12 @@ html, body {
       .line span {
         outline: 0px solid transparent;
       }
+
+  #prev-bg, #next-bg, #bgn {
+    display: inline-block;
+  }
+
+  #bgn {
+    width: 50px;
+    text-align: center;
+  }
