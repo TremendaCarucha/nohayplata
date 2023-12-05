@@ -1,5 +1,5 @@
 (() => {
-  const MAX_BG = 33
+  const MAX_BG = 34
 
   const $ = (id) => document.getElementById(id)
   const on = (elem, event, handler) => {
@@ -120,19 +120,23 @@
       taintTest: false,
       allowTaint: false
     }).then((canvas) => {
-      const context = canvas.getContext('2d')
-      const imageData = context.getImageData(0, 0, width, height).data
-      const outputCanvas = document.createElement('canvas')
-      const outputContext = outputCanvas.getContext('2d')
-      outputCanvas.width = width
-      outputCanvas.height = height
+      document.body.appendChild(canvas)
 
-      const idata = outputContext.createImageData(width, height)
-      idata.data.set(imageData)
-      outputContext.putImageData(idata, 0, 0)
-      const url = outputCanvas.toDataURL()
-      window.open(url)
-      // console.log(outputCanvas.toDataURL().replace("data:image/png;base64,", ""))
+      const url = canvas.toDataURL()
+      const filename = lines.map(l => l.innerText).join(' ').toLowerCase().replace(/\W+/g, ' ').trim().replace(/ /g, '_')
+      const download = $('download')
+      download.download = filename + '.png'
+      download.href = url
+      download.click()
+
+      if (window.ClipboardItem) {
+        canvas.toBlob((blob) => {
+          // Copy it to clipboard
+          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+        })
+      }
+    }).catch((err) => {
+      alert(err.message)
     })
   })
 
