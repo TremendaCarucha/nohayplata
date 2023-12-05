@@ -1,4 +1,10 @@
 (() => {
+  const $ = (id) => document.getElementById(id)
+
+  const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
+  const dom = {}
+  IDS.forEach(id => dom[id] = $(id))
+
   const lines = document.querySelectorAll('.line')
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
@@ -20,12 +26,10 @@
 
   // Sharing
 
-  const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
-
-  document.getElementById('share').onclick = () => {
+  $('share').onclick = () => {
     const search = new URLSearchParams()
     IDS.forEach((id) => {
-      const elem = document.getElementById(id)
+      const elem = dom[id]
       const val = elem.value || elem.innerText
       if (val) {
         search.append(id, val)
@@ -36,8 +40,8 @@
 
   const search = new URLSearchParams(location.search)
   search.forEach((val, id) => {
-    if (id) {
-      const elem = document.getElementById(id)
+    const elem = dom[id]
+    if (elem) {
       if ('value' in elem) {
         elem.value = val
       } else {
@@ -48,17 +52,15 @@
 
   // BG & FG
 
-  const bg = document.getElementById('bg')
   const updateBg = () => {
-    document.getElementById('canvas').style.backgroundColor = bg.value
+    $('canvas').style.backgroundColor = dom.bg.value
   }
-  bg.addEventListener('change', updateBg)
+  dom.bg.addEventListener('change', updateBg)
   updateBg()
   
-  const fg = document.getElementById('fg')
   const updateText = () => {
-    document.getElementById('lines').style.color = fg.value
+    $('lines').style.color = dom.fg.value
   }
-  fg.addEventListener('change', updateText)
+  dom.fg.addEventListener('change', updateText)
   updateText()
 })()
