@@ -55,7 +55,7 @@
 
   const bg = document.getElementById('bg')
   const updateBg = () => {
-    document.getElementById('background').style.background = bg.value
+    document.getElementById('canvas').style.backgroundColor = bg.value
   }
   bg.addEventListener('change', updateBg)
   updateBg()
