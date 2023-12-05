@@ -1,6 +1,15 @@
 (() => {
   const $ = (id) => document.getElementById(id)
 
+  const rescale = () => {
+    const width = $('app').clientWidth
+    const viewport = document.querySelector('meta[name=viewport]')
+    const ratio = window.innerWidth / width
+    viewport.setAttribute('content', 'width=' + width + ', initial-scale=' + ratio + ', user-scalable=no')
+  }
+  rescale()
+  window.addEventListener('resize', rescale);
+
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg']
   const dom = {}
   IDS.forEach(id => dom[id] = $(id))
