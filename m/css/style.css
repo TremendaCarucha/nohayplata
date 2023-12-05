@@ -17,7 +17,7 @@ html, body {
   #canvas {
     width: 700px;
     height: 550px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     position: relative;
     margin: 20px 0;
     background-repeat: no-repeat;

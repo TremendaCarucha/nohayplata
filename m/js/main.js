@@ -41,7 +41,7 @@
 
   // Sharing
 
-  $('share').onclick = () => {
+  on('share', 'click', () => {
     const search = new URLSearchParams()
     IDS.forEach((id) => {
       const elem = dom[id]
@@ -56,7 +56,7 @@
     const url = location.href.replace(/[#?].*/, '') + '#' + search.toString()
     location.href = url
     navigator.clipboard.writeText(url)
-  }
+  })
 
   const search = new URLSearchParams(location.hash.slice(1))
   search.forEach((val, id) => {
@@ -105,6 +105,35 @@
   })
   on('next-bg', 'click', () => {
     changeBgUrl(+1)
+  })
+
+  // Export
+
+  on('export', 'click', () => {
+    const element = $('canvas')
+    const width = element.clientWidth
+    const height = element.clientHeight
+    html2canvas(element, {
+      width: width,
+      height: height,
+      useCORS: true,
+      taintTest: false,
+      allowTaint: false
+    }).then((canvas) => {
+      const context = canvas.getContext('2d')
+      const imageData = context.getImageData(0, 0, width, height).data
+      const outputCanvas = document.createElement('canvas')
+      const outputContext = outputCanvas.getContext('2d')
+      outputCanvas.width = width
+      outputCanvas.height = height
+
+      const idata = outputContext.createImageData(width, height)
+      idata.data.set(imageData)
+      outputContext.putImageData(idata, 0, 0)
+      const url = outputCanvas.toDataURL()
+      window.open(url)
+      // console.log(outputCanvas.toDataURL().replace("data:image/png;base64,", ""))
+    })
   })
 
 })()
