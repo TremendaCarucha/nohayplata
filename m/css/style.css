@@ -42,7 +42,21 @@ html, body {
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      position: relative;
     }
+
+      .tutorial .line::after {
+        content: "";
+        width: 20%;
+        height: 100%;
+        background-image: url(../img/tap.gif);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 40%;
+        top: 10%;
+      }
+
       .line span {
         outline: 0px solid transparent;
         min-width: 5px;

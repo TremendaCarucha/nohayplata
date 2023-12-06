@@ -104,6 +104,14 @@
     changeBgUrl(+1)
   })
 
+  // Tutorial
+  if (!location.hash) {
+    document.body.className = 'tutorial'
+    on('lines', 'click', () => {
+      document.body.className = ''
+    })
+  }
+
   // Export
 
   on('export', 'click', () => {
