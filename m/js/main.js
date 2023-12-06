@@ -28,8 +28,20 @@
     fitty('#' + line.id, {
       multiLine: true, maxSize: 120, minSize: 40,
     })
-    on(line.parentNode, 'click', (e) => {
+    on(line.parentNode, 'click', () => {
       line.focus()
+    })
+    on(line.parentNode, 'dblclick', () => {
+      if (!line.innerText) {
+        return
+      }
+      // Select all
+      const sel = window.getSelection()
+      sel.removeAllRanges()
+      const range = document.createRange()
+      range.setStart(line, 0)
+      range.setEnd(line, 1)
+      sel.addRange(range)
     })
     on(line, 'fit', () => {
       // For tight multi-line
