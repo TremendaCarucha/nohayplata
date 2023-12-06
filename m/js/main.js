@@ -17,6 +17,7 @@
   }
   rescale()
   on(window, 'resize', rescale)
+  on(window, 'scroll', rescale)
 
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
@@ -25,7 +26,7 @@
 
   lines.forEach((line) => {
     const fitted = fitty('#' + line.id, {
-      multiLine: false, maxSize: 120
+      multiLine: true, maxSize: 120, minSize: 40,
     })[0]
     on(line.parentNode, 'click', (e) => {
       line.focus()
@@ -86,9 +87,19 @@
 
   // Bg URL
 
+  const loaded = []
+  const getBgUrl = (index) => {
+    return 'bg/' + index + '.jpg'
+  }
   const updateBgUrl = () => {
-    const index = dom.bgn.value
-    $('canvas').style.backgroundImage = index === '0' ? '' : 'url(bg/' + index + '.jpg)'
+    const index = parseInt(dom.bgn.value) || 0
+    $('canvas').style.backgroundImage = index ? 'url('+getBgUrl(index)+')' : ''
+    loaded[index] = true
+    // Preload
+    if (!loaded[index + 1] && index < MAX_BG) {
+      (new Image()).src = getBgUrl(index + 1)
+      loaded[index + 1] = true
+    }
   }
   const changeBgUrl = (by) => {
     const index = Math.min(MAX_BG, Math.max(0, parseInt(dom.bgn.value) + by))
@@ -126,12 +137,11 @@
       allowTaint: false
     }).then((canvas) => {
       const url = canvas.toDataURL()
-      const download = $('download')
-
       const filename = lines.map(l => l.innerText).join(' ').toLowerCase().replace(/\W+/g, ' ').trim().replace(/ /g, '_')
-      download.download = filename + '.png'
-      download.href = url
-      download.click()
+      const link = document.createElement('a')
+      link.download = filename + '.png'
+      link.href = url
+      link.click()
 
       window.open(url)
 
