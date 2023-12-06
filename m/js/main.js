@@ -25,21 +25,21 @@
   const lines = [dom.l1, dom.l2, dom.l3]
 
   lines.forEach((line) => {
-    const fitted = fitty('#' + line.id, {
+    fitty('#' + line.id, {
       multiLine: true, maxSize: 120, minSize: 40,
-    })[0]
+    })
     on(line.parentNode, 'click', (e) => {
       line.focus()
     })
-    on(line, 'fit', (e) => {
+    on(line, 'fit', () => {
+      // For tight multi-line
       line.style.lineHeight = line.style.fontSize
     })
-    fitted.fit()
   })
 
   // Sharing
 
-  on('share', 'click', () => {
+  on('share', 'mouseover', (e) => {
     const search = new URLSearchParams()
     IDS.forEach((id) => {
       const elem = dom[id]
@@ -51,9 +51,17 @@
         search.append(id, val)
       }
     })
-    const url = location.href.replace(/[#?].*/, '') + '#' + search.toString()
-    location.href = url
-    navigator.clipboard.writeText(url)
+    e.currentTarget.href = location.href.replace(/[#?].*/, '') + '#' + search.toString()
+  })
+
+  on('share', 'click', (e) => {
+    if (e.button !== 0) {
+      return
+    }
+    const share = e.currentTarget
+    navigator.clipboard.writeText(share.href)
+    share.innerText = 'Copiado!'
+    setTimeout(() => { share.innerText = 'Compartir' }, 1500)
   })
 
   const search = new URLSearchParams(location.hash.slice(1))
