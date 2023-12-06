@@ -19,7 +19,7 @@ html, body {
     height: 550px;
     /* border: 1px solid black; */
     position: relative;
-    margin: 20px 0;
+    margin: 10px 0;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
@@ -84,11 +84,24 @@ html, body {
       pointer-events: none;
     }
 
-  #prev-bg, #next-bg, #bgn {
-    display: inline-block;
+  #toolbar {
+    font-size: 30px;
   }
 
-  #bgn {
-    width: 50px;
-    text-align: center;
-  }
+    .color {
+      width: 70px;
+      height: 45px;
+      vertical-align: middle;
+    }
+
+    #prev-bg, #next-bg, #bgn {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      vertical-align: middle;
+    }
+
+    #bgn {
+      width: 50px;
+      text-align: center;
+    }
