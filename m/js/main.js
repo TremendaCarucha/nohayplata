@@ -1,5 +1,5 @@
 (() => {
-  const MAX_BG = 37
+  const MAX_BG = 34
 
   const $ = (id) => document.getElementById(id)
   const on = (elem, event, handler) => {
@@ -25,19 +25,13 @@
 
   lines.forEach((line) => {
     const fitted = fitty('#' + line.id, {
-      multiLine: false, maxSize: 180
+      multiLine: false, maxSize: 120
     })[0]
     on(line.parentNode, 'click', (e) => {
       line.focus()
     })
     on(line, 'fit', (e) => {
       line.style.lineHeight = line.style.fontSize
-    })
-    on(line, 'keydown', (e) => {
-      if (e.keyCode === 13) {
-        // No enters
-        // e.preventDefault()
-      }
     })
     fitted.fit()
   })
