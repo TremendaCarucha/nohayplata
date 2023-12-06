@@ -88,6 +88,10 @@ html, body {
     font-size: 30px;
   }
 
+    #toolbar label input {
+      display: inline-block;
+    }
+
     .color {
       width: 70px;
       height: 45px;
@@ -96,7 +100,7 @@ html, body {
 
     #prev-bg, #next-bg, #bgn {
       display: inline-block;
-      width: 50px;
+      width: 45px;
       height: 50px;
       vertical-align: middle;
     }
@@ -104,4 +108,8 @@ html, body {
     #bgn {
       width: 50px;
       text-align: center;
+    }
+
+    #upload {
+      display: none !important;
     }

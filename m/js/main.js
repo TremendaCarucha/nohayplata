@@ -132,6 +132,17 @@
     })
   }
 
+  // Upload bg
+
+  on('upload', 'change', (e) => {
+    const file = e.srcElement.files[0]
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      $('canvas').style.backgroundImage = 'url('+reader.result+')'
+    }
+    reader.readAsDataURL(file)
+  })
+
   // Export
 
   on('export', 'click', () => {
