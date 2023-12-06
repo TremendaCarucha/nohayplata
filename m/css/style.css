@@ -60,6 +60,7 @@ html, body {
       .line span {
         outline: 0px solid transparent;
         min-width: 5px;
+        white-space: pre !important;
       }
       
       #l1 {
