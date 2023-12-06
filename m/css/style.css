@@ -22,9 +22,10 @@ html, body {
     margin: 10px 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top center;
+    background-position: center center;
+    overflow: clip;
   }
-
+  
     #lines {
       padding: 0 5%;
       box-sizing: border-box;
