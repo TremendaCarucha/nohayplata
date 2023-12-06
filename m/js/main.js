@@ -126,11 +126,14 @@
       allowTaint: false
     }).then((canvas) => {
       const url = canvas.toDataURL()
-      const filename = lines.map(l => l.innerText).join(' ').toLowerCase().replace(/\W+/g, ' ').trim().replace(/ /g, '_')
       const download = $('download')
+
+      const filename = lines.map(l => l.innerText).join(' ').toLowerCase().replace(/\W+/g, ' ').trim().replace(/ /g, '_')
       download.download = filename + '.png'
       download.href = url
       download.click()
+
+      window.open(url)
 
       if (window.ClipboardItem) {
         canvas.toBlob((blob) => {
