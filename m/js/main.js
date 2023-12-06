@@ -13,7 +13,9 @@
     const width = $('app').clientWidth
     const viewport = document.querySelector('meta[name=viewport]')
     const ratio = window.innerWidth / width
-    viewport.setAttribute('content', 'width=' + width + ', initial-scale=' + ratio + ', user-scalable=no')
+    const values = { width: width, 'initial-scale': ratio/*, 'minimum-scale': ratio, 'maximum-scale': ratio*/, 'user-scalable': 'no' }
+    const content = Object.keys(values).map(key => key + '=' + values[key]).join(', ')
+    viewport.setAttribute('content', content)
   }
   rescale()
   on(window, 'resize', rescale)
@@ -26,7 +28,7 @@
 
   lines.forEach((line) => {
     fitty('#' + line.id, {
-      multiLine: true, maxSize: 120, minSize: 40,
+      multiLine: false, maxSize: 120, minSize: 1,
     })
     on(line.parentNode, 'click', () => {
       line.focus()
