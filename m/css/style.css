@@ -73,6 +73,17 @@ html, body {
         bottom: 0;
       }
 
+    #watermark {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      opacity: 0.1;
+      height: 5%;
+      transform: rotate(-90deg) translateX(100%);
+      transform-origin: 100% 100%;
+      pointer-events: none;
+    }
+
   #prev-bg, #next-bg, #bgn {
     display: inline-block;
   }
