@@ -115,3 +115,10 @@ html, body {
     #upload {
       display: none !important;
     }
+
+footer {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 20px;
+}
