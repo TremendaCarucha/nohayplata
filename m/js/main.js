@@ -8,6 +8,13 @@
     }
     elem.addEventListener(event, handler)
   }
+  const track = (event, params) => {
+    if (window.gtag && location.host === 'nohayplata.com') {
+      gtag('event', event, params)
+    } else {
+      console.log('track', event, params)
+    }
+  }
 
   const rescale = () => {
     const width = $('app').clientWidth
@@ -59,9 +66,9 @@
   })
 
   // Sharing
-
-  on('share', 'mouseover', (e) => {
-    const search = new URLSearchParams()
+    
+  const getState = () => {
+    const state = {}
     IDS.forEach((id) => {
       const elem = dom[id]
       // Unify whitespaces from HTML, so they get escaped more efficiently
@@ -70,10 +77,15 @@
         if (elem.type === 'color') {
           val = val.replace('#', '')
         }
-        search.append(id, val)
+        state[id] = val
       }
     })
-    e.currentTarget.href = location.href.replace(/[#?].*/, '') + '#' + search.toString()
+    return state
+  }
+
+  on('share', 'mouseover', (e) => {
+    const search = new URLSearchParams(getState()).toString()
+    e.currentTarget.href = location.href.replace(/[#?].*/, '') + '#' + search
   })
 
   on('share', 'click', (e) => {
@@ -84,6 +96,7 @@
     navigator.clipboard.writeText(share.href)
     share.innerText = 'Copiado!'
     setTimeout(() => { share.innerText = 'Compartir' }, 1500)
+    track('share', getState())
   })
 
   const search = new URLSearchParams(location.hash.slice(1))
@@ -160,6 +173,7 @@
     const reader = new FileReader()
     reader.onloadend = () => {
       $('canvas').style.backgroundImage = 'url('+reader.result+')'
+      track('upload')
     }
     reader.readAsDataURL(file)
   })
@@ -185,6 +199,8 @@
       link.click()
 
       window.open(url)
+
+      track('export', getState())
 
       if (window.ClipboardItem) {
         canvas.toBlob((blob) => {
