@@ -117,7 +117,7 @@ html, body {
     }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 5px;
   right: 10px;
   font-size: 20px;

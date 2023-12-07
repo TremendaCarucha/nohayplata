@@ -45,6 +45,13 @@
       range.setEnd(line, 1)
       sel.addRange(range)
     })
+    on(line, 'paste', (e) => {
+      const text = e.clipboardData && e.clipboardData.getData('text/plain')
+      if (text) {
+        e.preventDefault()
+        line.innerHTML = text
+      }
+    })
     on(line, 'fit', () => {
       // For tight multi-line
       line.style.lineHeight = line.style.fontSize
