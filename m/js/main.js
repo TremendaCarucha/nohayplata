@@ -26,7 +26,6 @@
   }
   rescale()
   on(window, 'resize', rescale)
-  on(window, 'scroll', rescale)
 
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
