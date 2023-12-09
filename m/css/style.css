@@ -65,6 +65,15 @@ html, body {
         white-space: pre !important;
       }
       
+      .tutorial #l1::after {
+        content: "NO HAY PLATA" !important;
+      }
+
+      .tutorial .line span::after {
+        content: "";
+        opacity: 0.3;
+      }
+      
       #l1 {
         position: absolute;
         top: 0;
@@ -119,9 +128,6 @@ html, body {
     #upload {
       display: none !important;
     }
-
-  #bgs-row {
-  }
 
     #bgs-row div {
       margin-bottom: 10px;
