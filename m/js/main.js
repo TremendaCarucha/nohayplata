@@ -47,22 +47,25 @@
     on(line.parentNode, 'click', () => {
       line.focus()
     })
-    on(line.parentNode, 'dblclick', () => {
-      if (!line.innerText) {
-        return
+    on(line, 'keypress', () => {
+      setTimeout(() => {
+        const br = line.querySelector('br')
+        if (br) {
+          line.replaceChild(document.createTextNode('\n'), br)
+        }
+      }, 1)
+    })
+    on(line, 'keydown', (e) => {
+      switch (e.keyCode) {
+        case 38: focusLine(e, -1); break
+        case 40: focusLine(e, +1); break
       }
-      // Select all
-      const sel = window.getSelection()
-      sel.removeAllRanges()
-      const range = document.createRange()
-      range.setStart(line, 0)
-      range.setEnd(line, 1)
-      sel.addRange(range)
     })
     on(line, 'paste', (e) => {
       const text = e.clipboardData && e.clipboardData.getData('text/plain')
       if (text) {
         e.preventDefault()
+        // FIXME: It's always replacing, even if there's text
         line.innerHTML = text
       }
     })
@@ -71,6 +74,18 @@
       line.style.lineHeight = line.style.fontSize
     })
   })
+
+  const focusLine = (e, by) => {
+    const line = e.currentTarget
+    if (line.innerText.includes('\n')) {
+      return
+    }
+    const index = (lines.indexOf(line) + by + lines.length) % lines.length
+    if (lines[index]) {
+      lines[index].focus()
+      e.preventDefault()
+    }
+  }
 
   // Sharing
     
