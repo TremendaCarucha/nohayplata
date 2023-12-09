@@ -155,18 +155,7 @@
     dom.bgn.value = index
     updateBgUrl()
   }
-  const changeBgUrl = (by) => {
-    const index = Math.min(MAX_BG, Math.max(0, parseInt(dom.bgn.value) + by))
-    setBgUrl(index)
-  }
   updateBgUrl()
-
-  on('prev-bg', 'click', () => {
-    changeBgUrl(-1)
-  })
-  on('next-bg', 'click', () => {
-    changeBgUrl(+1)
-  })
 
   // Bg modal
   on(dom.bgn.parentNode, 'click', () => {
