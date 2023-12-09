@@ -143,10 +143,13 @@
       loaded[index + 1] = true
     }
   }
-  const changeBgUrl = (by) => {
-    const index = Math.min(MAX_BG, Math.max(0, parseInt(dom.bgn.value) + by))
+  const setBgUrl = (index) => {
     dom.bgn.value = index
     updateBgUrl()
+  }
+  const changeBgUrl = (by) => {
+    const index = Math.min(MAX_BG, Math.max(0, parseInt(dom.bgn.value) + by))
+    setBgUrl(index)
   }
   updateBgUrl()
 
@@ -155,6 +158,28 @@
   })
   on('next-bg', 'click', () => {
     changeBgUrl(+1)
+  })
+
+  // Bg modal
+  on(dom.bgn.parentNode, 'click', () => {
+    const row = $('bgs-row')
+    if (row.innerHTML) {
+      return
+    }
+    let html = ''
+    for (let i = 1; i <= MAX_BG; i++) {
+      loaded[i] = true
+      html += '<div class="col-md-4 col-sm-6" data-bg="'+i+'"><img src="'+getBgUrl(i)+'" /></div>'
+    }
+    row.innerHTML = html
+  })
+
+  on('bgs-row', 'click', (e) => {
+    const bg = e.target.getAttribute('data-bg')
+    if (bg) {
+      setBgUrl(bg)
+      document.querySelector('.btn-close').click()
+    }
   })
 
   // Tutorial

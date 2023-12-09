@@ -108,12 +108,30 @@ html, body {
     }
 
     #bgn {
+      pointer-events: none;
+      background: none;
+      border: none;
       width: 50px;
       text-align: center;
+      color: white;
     }
 
     #upload {
       display: none !important;
+    }
+
+  #bgs-row {
+  }
+
+    #bgs-row div {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    #bgs-row img {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
 footer {
