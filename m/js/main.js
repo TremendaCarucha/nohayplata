@@ -177,7 +177,7 @@
     let html = ''
     for (let i = 1; i <= MAX_BG; i++) {
       loaded[i] = true
-      html += '<div class="col-md-4 col-sm-6" data-bg="'+i+'"><img src="'+getBgUrl(i)+'" /></div>'
+      html += '<div class="col-lg-3 col-md-4 col-sm-6" data-bg="'+i+'"><img src="'+getBgUrl(i)+'" /></div>'
     }
     row.innerHTML = html
   })
