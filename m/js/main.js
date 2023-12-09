@@ -16,16 +16,24 @@
     }
   }
 
+  let prevScale = 1
+
   const rescale = () => {
     const width = $('app').clientWidth
     const viewport = document.querySelector('meta[name=viewport]')
-    const ratio = window.innerWidth / width
-    const values = { width: width, 'initial-scale': ratio/*, 'minimum-scale': ratio, 'maximum-scale': ratio*/, 'user-scalable': 'no' }
+    const scale = window.innerWidth / width
+    if (scale === 1 || scale === prevScale) {
+      // Prevent glitch
+      return
+    }
+    prevScale = scale
+    const values = { width: width, 'initial-scale': scale/*, 'minimum-scale': ratio, 'maximum-scale': ratio*/, 'user-scalable': 'no' }
     const content = Object.keys(values).map(key => key + '=' + values[key]).join(', ')
     viewport.setAttribute('content', content)
   }
   rescale()
   on(window, 'resize', rescale)
+  on(window, 'scroll', rescale)
 
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
