@@ -35,6 +35,18 @@
   on(window, 'resize', rescale)
   on(window, 'scroll', rescale)
 
+  // English translation
+  
+  let isEnglish = false
+  if (navigator.language && navigator.language.slice(0, 2) !== 'es') {
+    isEnglish = true
+    document.querySelectorAll('[data-en]').forEach((elem) => {
+      elem.innerText = elem.getAttribute('data-en')
+    })
+  }
+
+  // Lines
+
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
   IDS.forEach(id => dom[id] = $(id))
@@ -116,8 +128,13 @@
     }
     const share = e.currentTarget
     navigator.clipboard.writeText(share.href)
-    share.innerText = 'Copiado!'
-    setTimeout(() => { share.innerText = 'Compartir' }, 1500)
+    const prev = share.innerText
+    share.innerText = isEnglish ? 'Copied!' : 'Copiado!'
+    share.style.pointerEvents = 'none'
+    setTimeout(() => {
+      share.innerText = prev
+      share.style.pointerEvents = ''
+    }, 1500)
     track('share', getState())
   })
 

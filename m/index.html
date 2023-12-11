@@ -29,33 +29,33 @@
 
       <div id="toolbar" class="container-fluid text-center">
         <div class="row g-0 pt-4">
-          <div class="col" title="Cambia el color de fondo" style="display: none;">
+          <div class="col" style="display: none;">
             <label>
-              Fondo: <input id="bg" type="color" class="color" value="#5e5c64" />
+              <span data-en="Background">Fondo</span>: <input id="bg" type="color" class="color" value="#5e5c64" />
             </label>
           </div>
-          <div class="col" title="Cambia la imagen de fondo">
+          <div class="col">
             <input id="bgn" value="1" type="hidden" disabled />
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#backgrounds">
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#backgrounds" data-en="Choose bg">
               Elegir fondo
             </button>
           </div>
-          <div class="col" title="Subi un fondo propio">
+          <div class="col">
             <label class="btn btn-info btn-lg">
-              Subir fondo
+              <span data-en="Upload bg">Subir fondo</span>
               <input id="upload" type="file" accept=".jpg, .jpeg, .png" />
             </label>
           </div>
           <div class="col-4" title="Cambia el color de texto">
             <label>
-              Texto: <input id="fg" type="color" class="color" value="#ffffff" />
+              <span data-en="Text">Texto</span>: <input id="fg" type="color" class="color" value="#ffffff" />
             </label>
           </div>
         </div>
         <div class="row g-0 pt-5">
           <div class="col">
-            <button id="export" type="button" class="btn btn-success btn-lg">Exportar</button>
-            <a id="share" href="#" type="button" class="btn btn-secondary btn-lg">Compartir</a>
+            <button id="export" type="button" class="btn btn-success btn-lg" data-en="Export">Exportar</button>
+            <a id="share" href="#" type="button" class="btn btn-secondary btn-lg" data-en="Share">Compartir</a>
           </div>
         </div>
       </div>
@@ -80,13 +80,13 @@
 
     <footer>
       <span class="float-start">
-        Compartir en 
+        <span data-en="Share on">Compartir en</span> 
         <a href="https://twitter.com/TremendaCarucha/status/1733609972162843055" target="_blank">
           <i class="bi bi-twitter-x"></i>
         </a>
       </span>
       <span class="float-end">
-        Hecho con ❤️ por <a href="https://twitter.com/TremendaCarucha" target="_blank">@TremendaCarucha</a>
+        <span data-en="Done with ❤️ by">Hecho con ❤️ por</span> <a href="https://twitter.com/TremendaCarucha" target="_blank">@TremendaCarucha</a>
       </span>
     </footer>
 
