@@ -131,6 +131,10 @@ html, body {
       display: none !important;
     }
 
+  #backgrounds, .modal-dialog {
+    width: 100% !important;
+  }
+
     #bgs-row div {
       margin-bottom: 10px;
       cursor: pointer;
