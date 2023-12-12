@@ -87,13 +87,16 @@ html, body {
 
     #watermark {
       position: absolute;
-      bottom: 0;
+      bottom: 6px;
       right: 0;
-      opacity: 0.1;
-      height: 5%;
+      opacity: 0.15;
       transform: rotate(-90deg) translateX(100%);
       transform-origin: 100% 100%;
       pointer-events: none;
+      color: white;
+      font-size: 21px;
+      font-family: Verdana, Garamond, serif;
+      text-shadow: 0 0 2px black;
     }
 
   #toolbar {
