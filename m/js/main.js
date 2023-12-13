@@ -262,8 +262,13 @@
         })
       }
     }).catch((err) => {
+      track('error', { error: err.message })
       alert(err.message)
     })
   })
 
+  window.addEventListener('error', (e) => {
+    track('error', { error: e.message })
+  })
+    
 })()
