@@ -100,14 +100,14 @@
   }
 
   // Sharing
-    
+  
   const getState = () => {
     const state = {}
     IDS.forEach((id) => {
       const elem = dom[id]
       // Unify whitespaces from HTML, so they get escaped more efficiently
       let val = elem.value || elem.innerText.replace(/\s/g, (c) => c === '\n' ? c : ' ')
-      if (val && val !== elem.defaultValue) {
+      if (val) {
         if (elem.type === 'color') {
           val = val.replace('#', '')
         }
