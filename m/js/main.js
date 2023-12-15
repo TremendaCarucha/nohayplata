@@ -1,5 +1,5 @@
 (() => {
-  const MAX_BG = 76
+  const MAX_BG = 77
 
   const $ = (id) => document.getElementById(id)
   const on = (elem, event, handler) => {
