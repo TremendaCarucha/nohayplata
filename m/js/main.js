@@ -212,7 +212,7 @@
   })
 
   // Tutorial
-  if (!location.hash) {
+  if (!lines.some(f => !!f.value)) {
     document.body.className = 'tutorial'
     on('lines', 'click', () => {
       document.body.className = ''
