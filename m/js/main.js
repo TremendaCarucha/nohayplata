@@ -206,11 +206,18 @@
     if (row.innerHTML) {
       return
     }
-    let html = ''
-    for (let i = 1; i <= MAX_BG; i++) {
-      html += '<div class="col-lg-3 col-md-4 col-sm-6" data-bg="'+i+'"><img src="'+getBgUrl(i)+'" /></div>'
+    let i = 1
+    const div = document.createElement('div')
+    const add = () => {
+      div.innerHTML = '<div class="col-lg-3 col-md-4 col-sm-6" data-bg="' + i + '"><img src="' + getBgUrl(i) + '" /></div>'
+      row.appendChild(div.firstChild)
+      i++
+      if (i <= MAX_BG) {
+        // Add gradually so they load in order
+        setTimeout(add, 50)
+      }
     }
-    row.innerHTML = html
+    add()
   })
 
   on('bgs-row', 'click', (e) => {
