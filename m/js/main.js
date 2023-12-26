@@ -131,9 +131,13 @@
     return state
   }
 
+  const getUrl = () => {
+    const hash = new URLSearchParams(getState()).toString()
+    return location.href.replace(/[#?].*/, '') + '#' + hash
+  }
+
   on('share', 'mouseover', (e) => {
-    const search = new URLSearchParams(getState()).toString()
-    e.currentTarget.href = location.href.replace(/[#?].*/, '') + '#' + search
+    e.currentTarget.href = getUrl()
   })
 
   on('share', 'click', (e) => {
@@ -281,6 +285,7 @@
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
         })
       }
+      location.href = getUrl()
     }).catch((err) => {
       track('error', { error: err.message })
       alert(err.message)
