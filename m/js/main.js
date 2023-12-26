@@ -57,7 +57,13 @@
 
   const IDS = ['l1', 'l2', 'l3', 'bg', 'fg', 'bgn']
   const dom = {}
-  IDS.forEach(id => dom[id] = $(id))
+  IDS.forEach(id => {
+    const elem = dom[id] = $(id)
+    const def = elem.getAttribute('data-default')
+    if ((!elem.value || elem.value === '#000000') && def) {
+      elem.value = def
+    }
+  })
   const lines = [dom.l1, dom.l2, dom.l3]
 
   lines.forEach((line) => {
@@ -115,7 +121,7 @@
       const elem = dom[id]
       // Unify whitespaces from HTML, so they get escaped more efficiently
       let val = elem.value || elem.innerText.replace(/\s/g, (c) => c === '\n' ? c : ' ')
-      if (val) {
+      if (val && val !== elem.getAttribute('data-default')) {
         if (elem.type === 'color') {
           val = val.replace('#', '')
         }

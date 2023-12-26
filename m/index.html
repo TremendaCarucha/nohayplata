@@ -31,11 +31,11 @@
         <div class="row g-0 pt-4">
           <div class="col" style="display: none;">
             <label>
-              <span data-en="Background">Fondo</span>: <input id="bg" type="color" class="color" value="#5e5c64" />
+              <span data-en="Background">Fondo</span>: <input id="bg" type="color" class="color" data-default="#5e5c64" />
             </label>
           </div>
           <div class="col">
-            <input id="bgn" value="1" type="hidden" disabled />
+            <input id="bgn" data-default="1" type="hidden" disabled />
             <button id="choose-bg" type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#backgrounds" data-en="Choose bg">
               Elegir fondo
             </button>
@@ -48,7 +48,7 @@
           </div>
           <div class="col-4" title="Cambia el color de texto">
             <label>
-              <span data-en="Text">Texto</span>: <input id="fg" type="color" class="color" value="#ffffff" />
+              <span data-en="Text">Texto</span>: <input id="fg" type="color" class="color" data-default="#ffffff" />
             </label>
           </div>
         </div>
