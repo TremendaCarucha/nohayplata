@@ -48,7 +48,7 @@ html, body {
       position: relative;
     }
 
-      .tutorial .line::after {
+      .tutorial.t2 .line::after {
         content: "";
         width: 20%;
         height: 100%;
@@ -128,6 +128,22 @@ html, body {
       width: 50px;
       text-align: center;
       color: white;
+    }
+
+    #choose-bg {
+      position: relative;
+    }
+
+    .tutorial.t1 #choose-bg::after {
+      content: "";
+      width: 200%;
+      height: 200%;
+      background-image: url(../img/tap.gif);
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 30%;
+      top: 0%;
     }
 
     #upload {

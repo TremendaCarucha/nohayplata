@@ -7,6 +7,14 @@
       elem = $(elem)
     }
     elem.addEventListener(event, handler)
+    return elem
+  }
+  const once = (elem, event, handler) => {
+    const fn = (e) => {
+      handler(e)
+      element.removeEventListener(event, fn)
+    }
+    const element = on(elem, event, fn)
   }
   const track = (event, params) => {
     if (window.gtag && location.host === 'nohayplata.com') {
@@ -169,19 +177,12 @@
 
   // Bg URL
 
-  const loaded = []
   const getBgUrl = (index) => {
     return 'bg/' + index + '.jpg'
   }
   const updateBgUrl = () => {
-    const index = parseInt(dom.bgn.value) || 0
-    $('canvas').style.backgroundImage = index ? 'url('+getBgUrl(index)+')' : ''
-    loaded[index] = true
-    // Preload
-    if (!loaded[index + 1] && index < MAX_BG) {
-      (new Image()).src = getBgUrl(index + 1)
-      loaded[index + 1] = true
-    }
+    const index = parseInt(dom.bgn.value) || 1
+    $('canvas').style.backgroundImage = index ? 'url(' + getBgUrl(index) + ')' : ''
   }
   const setBgUrl = (index) => {
     dom.bgn.value = index
@@ -190,14 +191,13 @@
   updateBgUrl()
 
   // Bg modal
-  on(dom.bgn.parentNode, 'click', () => {
+  once('choose-bg', 'click', () => {
     const row = $('bgs-row')
     if (row.innerHTML) {
       return
     }
     let html = ''
     for (let i = 1; i <= MAX_BG; i++) {
-      loaded[i] = true
       html += '<div class="col-lg-3 col-md-4 col-sm-6" data-bg="'+i+'"><img src="'+getBgUrl(i)+'" /></div>'
     }
     row.innerHTML = html
@@ -208,16 +208,30 @@
     if (bg) {
       setBgUrl(bg)
       document.querySelector('.btn-close').click()
+      if (document.body.className === 'tutorial t1') {
+        calculateTutorial(1)
+      }
     }
   })
 
   // Tutorial
-  if (!lines.some(f => !!f.value)) {
-    document.body.className = 'tutorial'
-    on('lines', 'click', () => {
-      document.body.className = ''
-    })
+  const calculateTutorial = (minStep) => {
+    const body = document.body
+    if (minStep === 2 || lines.some(f => !!f.innerText)) {
+      body.className = ''
+    } else {
+      if (minStep === 0 && dom.bgn.value === '1') {
+        body.className = 'tutorial t1'
+      } else {
+        body.className = 'tutorial t2'
+      }
+      once('lines', 'click', () => {
+        calculateTutorial(2)
+      })
+    }
   }
+
+  calculateTutorial(0)
 
   // Upload bg
 
